@@ -10,7 +10,7 @@ while (1==1)
     if (choice==1)
         %% Image Read
         xx = 1;
-        for k=1:5
+        for k=1:6
             I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Train (%d).jpg', k));
             I = imresize(I,[1000,260]);
             [I3,RGB] = createMask(I);
@@ -51,10 +51,10 @@ while (1==1)
                 Train_Feat = [Train_Feat;ff];
             end
             
-            if k<3 && k>1
-                xx = [xx;1];
+            if k<=3 && k>1
+                xx = [xx;1];    % 1 is diseased
             elseif k>1
-                xx = [xx;2];
+                xx = [xx;2];    % 2 is not diseased
             end
             Train_Label = xx.';
             Train_Label = transpose(xx);
