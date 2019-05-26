@@ -171,16 +171,14 @@ while (1==1)
                 Train_Feat = [Train_Feat;ff];
             end
             
-          
+            index = index+1;            
             
             disp('Current: Apple___Cedar_apple_rust ');
             disp(k); 
             
             if(index > 1)
-                xx = [xx;3];    % 2 is Apple___Cedar_apple_rust
-            end
-            
-            index = index+1;              
+            xx = [xx;3];    % 2 is Apple___Cedar_apple_rust
+                
 
             Train_Label = xx.';
             Train_Label = transpose(xx);
@@ -229,16 +227,12 @@ while (1==1)
                 Train_Feat = [Train_Feat;ff];
             end
             
-         
+            index = index+1;           
             
             disp('Current: Apple___healthy ');
             disp(k); 
             
-            if(index > 1)
-                xx = [xx;4];    % 2 is Apple___healthy       
-            end
-            
-            index = index+1;              
+            xx = [xx;4];    % 2 is Apple___healthy                
 
             Train_Label = xx.';
             Train_Label = transpose(xx);
@@ -314,17 +308,11 @@ while (1==1)
         
         %% Visualize Results
         if result == 1
-            helpdlg('Apple___Apple_scab Disease Detect');
-            disp('Apple___Apple_scab Disease Detect');
-        elseif result == 2
-            helpdlg('Apple___Black_rot Disease Detect');
-            disp('Apple___Black_rot Disease Detect');
-        elseif result == 3
-            helpdlg('Apple___Cedar_apple_rust Disease Detect');
-            disp('Apple___Cedar_apple_rust Disease Detect');  
-        elseif result == 4
+            helpdlg(' Disease Detect ');
+            disp(' Disease Detect ');
+        else
             helpdlg(' Disease not Detect ');
-            disp('Disease not Detect');            
+            disp('Disease not Detect');
         end
     end
     if (choice==3)
