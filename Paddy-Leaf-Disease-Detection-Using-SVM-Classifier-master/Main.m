@@ -10,9 +10,9 @@ while (1==1)
     if (choice==1)
         %% Image Read
         xx = 1;
-        for k=1:6
-            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Train (%d).jpg', k));
-            I = imresize(I,[1000,260]);
+        for k=1:12
+            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v001/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Train (%d).jpg', k));
+            I = imresize(I,[1024,1024]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
             img = rgb2gray(seg_img);
@@ -52,20 +52,27 @@ while (1==1)
             end
             
             if k<=3 && k>1
-                xx = [xx;1];    % 1 is diseased
-            elseif k>1
+                xx = [xx;1];    % 1 is diseased                
+            elseif k<=6 && k>3
                 xx = [xx;2];    % 2 is not diseased
+            elseif k<=9 && k>6
+                xx = [xx;3];    % 2 is not diseased 
+            elseif k<=12 && k>9
+                xx = [xx;4];    % 2 is not diseased                 
             end
             Train_Label = xx.';
             Train_Label = transpose(xx);
         end
         disp('Train Complete');
+        writeMatrix(Train_Feat, 'Train_Feat.txt');
+        writeMatrix(Train_Label, 'Train_Label.txt');      
+        save('Training_Data.mat','Train_Feat','Train_Label');
     end
     if (choice==2)
         
         [filename, pathname] = uigetfile({'*.*';'*.bmp';'*.jpg';'*.gif'}, 'Pick a Leaf Image File');
         I = imread([pathname,filename]);
-        I = imresize(I,[1000,260]);
+        I = imresize(I,[1024,1024]);
         figure, imshow(I); title('Query Leaf Image');
 
         
@@ -117,8 +124,11 @@ while (1==1)
 
         % Put the test features into variable 'test'
         test = feat_disease;
+        writeMatrix(test, 'Test_Feat.txt');  
+        save('Test_Data.mat','test','Train_Label');
         result = multisvm(Train_Feat,Train_Label,test);
-        %disp(result);
+        disp('Result:');
+        disp(result);
 
         
         %% Visualize Results
