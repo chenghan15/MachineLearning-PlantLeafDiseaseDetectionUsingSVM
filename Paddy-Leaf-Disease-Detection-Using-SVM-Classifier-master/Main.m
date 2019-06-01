@@ -36,9 +36,9 @@ while (1==1)
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
             
-Correlation = stats.Correlation;            
-Kurtosis = kurtosis(double(seg_img(:)));
-Skewness = skewness(double(seg_img(:)));            
+            Correlation = stats.Correlation;            
+            Kurtosis = kurtosis(double(seg_img(:)));
+            Skewness = skewness(double(seg_img(:)));            
             
             % Inverse Difference Movement
             m = size(seg_img,1);
@@ -100,9 +100,9 @@ Skewness = skewness(double(seg_img(:)));
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
             
-Correlation = stats.Correlation;            
-Kurtosis = kurtosis(double(seg_img(:)));
-Skewness = skewness(double(seg_img(:)));             
+            Correlation = stats.Correlation;            
+            Kurtosis = kurtosis(double(seg_img(:)));
+            Skewness = skewness(double(seg_img(:)));             
             
             % Inverse Difference Movement
             m = size(seg_img,1);
@@ -163,9 +163,9 @@ Skewness = skewness(double(seg_img(:)));
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
             
-Correlation = stats.Correlation;            
-Kurtosis = kurtosis(double(seg_img(:)));
-Skewness = skewness(double(seg_img(:)));             
+            Correlation = stats.Correlation;            
+            Kurtosis = kurtosis(double(seg_img(:)));
+            Skewness = skewness(double(seg_img(:)));             
             
             % Inverse Difference Movement
             m = size(seg_img,1);
@@ -226,9 +226,9 @@ Skewness = skewness(double(seg_img(:)));
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
             
-Correlation = stats.Correlation;            
-Kurtosis = kurtosis(double(seg_img(:)));
-Skewness = skewness(double(seg_img(:)));             
+            Correlation = stats.Correlation;            
+            Kurtosis = kurtosis(double(seg_img(:)));
+            Skewness = skewness(double(seg_img(:)));             
             
             % Inverse Difference Movement
             m = size(seg_img,1);
@@ -310,9 +310,9 @@ Skewness = skewness(double(seg_img(:)));
         a = sum(double(seg_img(:)));
         Smoothness = 1-(1/(1+a));
         
-Correlation = stats.Correlation;            
-Kurtosis = kurtosis(double(seg_img(:)));
-Skewness = skewness(double(seg_img(:)));         
+        Correlation = stats.Correlation;            
+        Kurtosis = kurtosis(double(seg_img(:)));
+        Skewness = skewness(double(seg_img(:)));         
         
         % Inverse Difference Movement
         m = size(seg_img,1);
