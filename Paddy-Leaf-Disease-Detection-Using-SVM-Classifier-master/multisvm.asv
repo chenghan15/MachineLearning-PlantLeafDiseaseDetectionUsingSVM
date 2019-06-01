@@ -7,7 +7,7 @@ function [itrfin] = multisvm( TM,TL,test )
     %Outputs: itrfin=Resultant class(Group,USE ROW VECTOR MATRIX) to which testRowN set belongs 
 
     %----------------------------------------------------------------------%
-    % IMPORTANT: DON'TM USE THIS PROGRAM FOR CLASS LESS THAN 3,            %
+    % IMPORTANT: DON'TM USE THIS PROGRAM FOR CLASS LESS THAN 3,             %
     %            OTHERWISE USE svmtrain,svmclassify DIRECTLY or            %
     %            add an else condition also for that case in this program. %
     %            Modify required data to use Kernel Functions and Plot also%
@@ -30,8 +30,8 @@ function [itrfin] = multisvm( TM,TL,test )
         TM=trainingMatrix;
         uniqueLabel=unique(TL);   %unique(label) 返回与 label 中相同的数据，但是不包含重复项。
         uLabelLength=length(uniqueLabel);    %数组长度，即行数和列数中的较大值，相当于max(size(a)), 得到一共有几个类别(class)
-        cTempTL=[];
-        cTempTM=[];
+        c4=[];
+        c3=[];
         j=1;
         k=1;
         if(uLabelLength>2)     %如果类别大于2
@@ -51,12 +51,12 @@ function [itrfin] = multisvm( TM,TL,test )
                 % This is the loop for Reduction of Training Set
                 for i=1:size(newClass0vs1,2)    %size(newClass0vs1,2),返回矩阵newClass0vs1的列数
                     if newClass0vs1(1,i)==0;    %A(2,1) = {[1 2 3; 4 5 6]}，就是一个2行一列的单元数组
-                        cTempTM(k,:)=TM(i,:);    %一行元素：  A(i,:)表示提取A矩阵的第i行元素，c3存储了newClass0vs1中非1的所有TM数据
+                        c3(k,:)=TM(i,:);    %一行元素：  A(i,:)表示提取A矩阵的第i行元素，c3存储了newClass0vs1中非1的所有TM数据
                         k=k+1;
                     end
                 end                    
-                TM=cTempTM;  %TM赋值为c3
-                cTempTM=[];
+                TM=c3;  %TM赋值为c3
+                c3=[];
                 k=1;
                 
                 %<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  
@@ -66,12 +66,12 @@ function [itrfin] = multisvm( TM,TL,test )
                 % This is the loop for reduction of group
                 for i=1:size(newClass0vs1,2)
                     if newClass0vs1(1,i)==0;
-                        cTempTL(1,j)=TL(1,i);
+                        c4(1,j)=TL(1,i);
                         j=j+1;
                     end
                 end
-                TL=cTempTL;  %TM赋值为c4
-                cTempTL=[];
+                TL=c4;  %TM赋值为c4
+                c4=[];
                 j=1;
                 
                 %<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<        
@@ -97,7 +97,8 @@ function [itrfin] = multisvm( TM,TL,test )
 end
 
 % Give more suggestions for improving the program.
-% From R2018a, matlab removed svmtrain and svmclassify
+% f
+
 
 
 

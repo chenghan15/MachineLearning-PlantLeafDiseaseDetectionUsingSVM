@@ -11,9 +11,9 @@ while (1==1)
         %% Image Read
         xx = 1;
         index = 1;
-        for k=1:5     %504
+        for k=1:50     %504
             I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v001/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Apple_scab/%d.JPG', k));
-            I = imresize(I,[1024,1024]);
+            I = imresize(I,[256,256]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
             img = rgb2gray(seg_img);
@@ -22,6 +22,9 @@ while (1==1)
             stats = graycoprops(glcms,'Contrast Correlation Energy Homogeneity');
 
             Contrast = stats.Contrast;
+            
+
+            
             Energy = stats.Energy;
             Homogeneity = stats.Homogeneity;
             Mean = mean2(seg_img);
@@ -32,6 +35,11 @@ while (1==1)
             Variance = mean2(var(double(seg_img)));
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
+            
+Correlation = stats.Correlation;            
+Kurtosis = kurtosis(double(seg_img(:)));
+Skewness = skewness(double(seg_img(:)));            
+            
             % Inverse Difference Movement
             m = size(seg_img,1);
             n = size(seg_img,2);
@@ -44,7 +52,7 @@ while (1==1)
             end
             IDM = double(in_diff);
 
-            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM];
+            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM, Correlation, Kurtosis, Skewness];
             
 
             
@@ -70,9 +78,9 @@ while (1==1)
             Train_Label = transpose(xx);
         end
         
-        for k=1:5     %497
+        for k=1:50     %497
             I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v001/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Black_rot/%d.jpg', k));
-            I = imresize(I,[1024,1024]);
+            I = imresize(I,[256,256]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
             img = rgb2gray(seg_img);
@@ -91,6 +99,11 @@ while (1==1)
             Variance = mean2(var(double(seg_img)));
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
+            
+Correlation = stats.Correlation;            
+Kurtosis = kurtosis(double(seg_img(:)));
+Skewness = skewness(double(seg_img(:)));             
+            
             % Inverse Difference Movement
             m = size(seg_img,1);
             n = size(seg_img,2);
@@ -103,7 +116,7 @@ while (1==1)
             end
             IDM = double(in_diff);
 
-            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM];
+            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM, Correlation, Kurtosis, Skewness];
             
 
             
@@ -128,9 +141,9 @@ while (1==1)
             Train_Label = transpose(xx);
         end        
         
-        for k=1:5     %220
+        for k=1:50     %220
             I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v001/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Cedar_apple_rust/%d.jpg', k));
-            I = imresize(I,[1024,1024]);
+            I = imresize(I,[256,256]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
             img = rgb2gray(seg_img);
@@ -149,6 +162,11 @@ while (1==1)
             Variance = mean2(var(double(seg_img)));
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
+            
+Correlation = stats.Correlation;            
+Kurtosis = kurtosis(double(seg_img(:)));
+Skewness = skewness(double(seg_img(:)));             
+            
             % Inverse Difference Movement
             m = size(seg_img,1);
             n = size(seg_img,2);
@@ -161,7 +179,7 @@ while (1==1)
             end
             IDM = double(in_diff);
 
-            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM];
+            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM, Correlation, Kurtosis, Skewness];
             
 
             
@@ -186,9 +204,9 @@ while (1==1)
             Train_Label = transpose(xx);
         end          
         
-        for k=1:5         %1316
+        for k=1:50         %1316
             I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v001/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___healthy/%d.jpg', k));
-            I = imresize(I,[1024,1024]);
+            I = imresize(I,[256,256]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
             img = rgb2gray(seg_img);
@@ -207,6 +225,11 @@ while (1==1)
             Variance = mean2(var(double(seg_img)));
             a = sum(double(seg_img(:)));
             Smoothness = 1-(1/(1+a));
+            
+Correlation = stats.Correlation;            
+Kurtosis = kurtosis(double(seg_img(:)));
+Skewness = skewness(double(seg_img(:)));             
+            
             % Inverse Difference Movement
             m = size(seg_img,1);
             n = size(seg_img,2);
@@ -219,7 +242,7 @@ while (1==1)
             end
             IDM = double(in_diff);
 
-            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM];
+            ff = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM, Correlation, Kurtosis, Skewness];
             
 
             
@@ -253,7 +276,7 @@ while (1==1)
         
         [filename, pathname] = uigetfile({'*.*';'*.bmp';'*.jpg';'*.gif'}, 'Pick a Leaf Image File');
         I = imread([pathname,filename]);
-        I = imresize(I,[1024,1024]);
+        I = imresize(I,[256,256]);
         figure, imshow(I); title('Query Leaf Image');
 
         
@@ -286,6 +309,11 @@ while (1==1)
         Variance = mean2(var(double(seg_img)));
         a = sum(double(seg_img(:)));
         Smoothness = 1-(1/(1+a));
+        
+Correlation = stats.Correlation;            
+Kurtosis = kurtosis(double(seg_img(:)));
+Skewness = skewness(double(seg_img(:)));         
+        
         % Inverse Difference Movement
         m = size(seg_img,1);
         n = size(seg_img,2);
@@ -298,7 +326,7 @@ while (1==1)
         end
         IDM = double(in_diff);
 
-        feat_disease = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM];
+        feat_disease = [Contrast,Energy,Homogeneity, Mean, Standard_Deviation, Entropy, RMS, Variance, Smoothness, IDM, Correlation, Kurtosis, Skewness];
         %% SVM Classifier
         % Load All The Features
         %load('Training_Data.mat')
