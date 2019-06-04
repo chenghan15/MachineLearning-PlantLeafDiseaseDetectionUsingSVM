@@ -416,7 +416,7 @@ while (1==1)
         libsvmwrite('Train_Feat_svm_data.mat',Train_Label', instance); 
         [s,e]=dos('svm-scale.bat');
         [data_label,data_instance]=libsvmread('scaled_Train_Feat_svm_data.mat');  
-        model = svmtrain(data_label(1:600),data_instance(1:600,:), '-b 1');
+        model = svmtrain(data_label(1:600),data_instance(1:600,:), '-b 1 -t 2');        % -t 2  use rbf kernel
         
         if('single' == currModel)
             [predict_label,accuracy,dec_values] = svmpredict(data_label(601:601),data_instance(601:601,:), model, '-b 1'); 
