@@ -6,9 +6,33 @@ clear all
 
 while (1==1)
     choice=menu('Paddy Leaf Disease Detection','....... Training........','....... Testing......','........ Close........');
+         
+%>>>>>>>>>>parameters definiens and setting>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
+
+    currModel = 'single';
+    %currModel = 'batchs';   
     
-    %currModel = 'single';
-    currModel = 'batchs';    
+    apple_rot_class = 1;
+    apple_rust_class = 2;
+    apple_healthy_class = 3;
+    
+    
+    classOneTrainingLeavesQuantity = 200;
+    classTwoTrainingLeavesQuantity = 200;
+    classThreeTrainingLeavesQuantity = 200;
+%     classFourTrainingLeavesQuantity = 0;
+    
+    totalTrainingLeavesQuantitiy = classOneTrainingLeavesQuantity + classTwoTrainingLeavesQuantity + classThreeTrainingLeavesQuantity;
+        
+    if('single' == currModel)
+        testLeavesQuantity = 1;
+        testLeavesClass = apple_rot_class;         
+    elseif ('batchs' == currModel)
+        testLeavesQuantity = 255;
+        testLeavesClass = apple_healthy_class;        
+    end
+    
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>      
     
     if (choice==1)
         %% Image Read
@@ -16,8 +40,8 @@ while (1==1)
         index = 1;
         
         
-%         for k=1:100     %504
-%             I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v005/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Apple_scab/%d.JPG', k));
+%         for k=1: classFourTrainingLeavesQuantity     %504
+%             I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v006/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Apple_scab/%d.JPG', k));
 %             I = imresize(I,[256,256]);
 %             [I3,RGB] = createMask(I);
 %             seg_img = RGB;
@@ -83,8 +107,8 @@ while (1==1)
 %             Train_Label = transpose(xx);
 %         end
         
-        for k=1:200     %497
-            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v005/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Black_rot/%d.jpg', k));
+        for k=1: classOneTrainingLeavesQuantity     %497
+            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v006/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Black_rot/%d.jpg', k));
             I = imresize(I,[256,256]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
@@ -146,8 +170,8 @@ while (1==1)
             Train_Label = transpose(xx);
         end        
         
-        for k=1:200     %220
-            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v005/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Cedar_apple_rust/%d.jpg', k));
+        for k=1: classTwoTrainingLeavesQuantity     %220
+            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v006/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___Cedar_apple_rust/%d.jpg', k));
             I = imresize(I,[256,256]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
@@ -209,8 +233,8 @@ while (1==1)
             Train_Label = transpose(xx);
         end          
         
-        for k=1:200         %1316
-            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v005/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___healthy/%d.jpg', k));
+        for k=1: classThreeTrainingLeavesQuantity         %1316
+            I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v006/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Train/Apple___healthy/%d.jpg', k));
             I = imresize(I,[256,256]);
             [I3,RGB] = createMask(I);
             seg_img = RGB;
@@ -345,12 +369,12 @@ while (1==1)
 
 
             Train_Label = Train_Label'; 
-            Train_Label = [Train_Label;1].';             
+            Train_Label = [Train_Label; 1].';             
         elseif('batchs' == currModel)
             disp('batch model');
             
-            for k=1:55         %1316
-                I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v005/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Test/Apple___Cedar_apple_rust/%d.jpg', k));
+            for k=1: testLeavesQuantity         %1316
+                I = imread(sprintf('C:/Users/az91d/Desktop/newFolder/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master_v006/Paddy-Leaf-Disease-Detection-Using-SVM-Classifier-master/Test/total/%d.jpg', k));
                 I = imresize(I,[256,256]);
                 [I3,RGB] = createMask(I);
                 seg_img = RGB;
@@ -399,7 +423,15 @@ while (1==1)
 
                 Train_Feat = [Train_Feat;ff];
                 Train_Label = Train_Label'; 
-                Train_Label = [Train_Label;4].';              
+%                 Train_Label = [Train_Label; testLeavesClass].';     
+                
+                if k<=85
+                    Train_Label = [Train_Label; 2].';   %2
+                elseif k<=170 && k>85
+                    Train_Label = [Train_Label; 1].';   %1   
+                elseif k>170 && k<=255
+                    Train_Label = [Train_Label; 3].';   %3
+                end
 
             end                  
         end;
@@ -414,21 +446,29 @@ while (1==1)
         
         instance = sparse(Train_Feat);
         libsvmwrite('Train_Feat_svm_data.mat',Train_Label', instance); 
-        [s,e]=dos('svm-scale.bat');
-        [data_label,data_instance]=libsvmread('scaled_Train_Feat_svm_data.mat');  
-        model = svmtrain(data_label(1:600),data_instance(1:600,:), '-b 1 -t 2');        % -t 2  use rbf kernel
         
-        if('single' == currModel)
-            [predict_label,accuracy,dec_values] = svmpredict(data_label(601:601),data_instance(601:601,:), model, '-b 1'); 
-        elseif('batchs' == currModel)
-            [predict_label,accuracy,dec_values] = svmpredict(data_label(601:655),data_instance(601:655,:), model, '-b 1');    
-        end
+        
+        [s,e]=dos('svm-scale.bat');         % date normalization        
+        
+        
+        [data_label,data_instance]=libsvmread('scaled_Train_Feat_svm_data.mat'); 
+        libsvmwrite('scaled_Train_Feat_svm_data.mat',data_label(1:totalTrainingLeavesQuantitiy), data_instance(1:totalTrainingLeavesQuantitiy,:));
+        libsvmwrite('scaled_Test_Feat_svm_data.mat',data_label(totalTrainingLeavesQuantitiy + 1:totalTrainingLeavesQuantitiy + testLeavesQuantity), data_instance(totalTrainingLeavesQuantitiy + 1:totalTrainingLeavesQuantitiy + testLeavesQuantity,:)); 
+
+                                
+%          [c,g]=dos('findCG.bat');        % Cross-validation to get the optimized kernel parameters c and gamma 
+        
+        
+        [data_label,data_instance]=libsvmread('scaled_Train_Feat_svm_data.mat');  
+        [test_label,test_instance]=libsvmread('scaled_Test_Feat_svm_data.mat');        
+        model = svmtrain(data_label, data_instance, '-b 1 -t 2 -c 8192 -g 0.125');        % -t 2  use rbf kernel      
+        [predict_label,accuracy,dec_values] = svmpredict(test_label, test_instance, model, '-b 1'); 
           
         
-        
-        disp(predict_label);
-        disp(accuracy);          
+        disp(predict_label);                  
         disp(dec_values);   
+        disp(accuracy);
+        
         
         uniqueLabel = unique(data_label);
         
@@ -456,8 +496,8 @@ while (1==1)
         
         %result = multisvm(Train_Feat,Train_Label,test);
         %result = 'unknow~~~';
-        disp('Result:');
-        disp(result);
+%         disp('Result:');
+%         disp(result);
 
         
         %% Visualize Results
